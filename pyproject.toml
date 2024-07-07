@@ -67,11 +67,12 @@ src = ["src"]
 [tool.ruff.lint]
 extend-select = ["ALL"]
 ignore = [
-    "ANN",    # Type annotations
-    "COM812", # Trailing comma missing
-    "TRY003", # Long message as argument
+    "ANN",    # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+    "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
+    "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
 ]
 extend-per-file-ignores."tests/*.py" = [
-    "S101", # Assert used
+    "S101",    # https://docs.astral.sh/ruff/rules/assert/
+    "PLR2004", # https://docs.astral.sh/ruff/rules/magic-value-comparison/
 ]
 pydocstyle.convention = "numpy"
