@@ -4,6 +4,7 @@ description = "Read a Nanonis spectroscopy .dat file into a xarray Dataset"
 authors = [{ name = "Angelo Peronio" }]
 keywords = [
     "Nanonis",
+    "SPECS",
     "xarray",
     "STM",
     "STS",
@@ -30,16 +31,15 @@ classifiers = [
 # <https://scientific-python.org/specs/spec-0000/>
 # Upgrade the pyupgrade configuration in .pre-commit.config.yaml accordingly.
 requires-python = ">= 3.10"
-dependencies = ["pint >= 0.24.1", "xarray >= 2022.6.0"]
-optional-dependencies = { dev = [
+dependencies = ["xarray >= 2022.6.0", "pint >= 0.24"]
+optional-dependencies.dev = [
     "build",
-    "pytest",
     "pre-commit",
     "ruff",
     "twine",
-], test = [
-    "pytest",
-] }
+    "nanonis-xarray[test]",
+]
+optional-dependencies.test = ["pytest", "pytest-cov"]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
@@ -59,7 +59,7 @@ tag_regex = '^(?P<version>v?\d+\.\d+\.\d+)$'
 local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib"]
+addopts = ["--import-mode=importlib", "--cov=nanonis_xarray"]
 
 [tool.ruff]
 src = ["src"]
