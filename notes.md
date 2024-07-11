@@ -4,6 +4,7 @@
 
 ## ToDo
 
-* Parse `Bias Spectroscopy>MultiLine Settings : Segment Start (V), Segment End (V), Settling (s), Integration (s), Steps (xn) -1E+0,1E+0,100E-6,100E-6,256
-`
-* Put all ad-hoc logic in a single place, with a boolean switch.
+* Evaluate pint-xarray. Maybe attrs.units is enough?
+* Try to plot, to see how the units look like.
+* Do we want to normalize the header keys?
+* Do we want to have the header to be accessible like `data.attrs.key.subkey`?

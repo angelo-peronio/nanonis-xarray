@@ -5,12 +5,13 @@ from pathlib import Path
 import pandas as pd
 import xarray as xr
 
+from .data import parse_data
 from .header import parse_header_lines
 
 _encoding = "utf-8"
 
 
-def read_dat(path: Path | str) -> xr.Dataset:
+def read_dat(path: Path | str, *, squeeze=True) -> xr.Dataset:
     """Read a Nanonis .dat file into an xarray Dataset."""
     path = Path(path)
     tag_idx = find_tag(path, "[DATA]", encoding=_encoding)
@@ -18,8 +19,12 @@ def read_dat(path: Path | str) -> xr.Dataset:
     with path.open(encoding=_encoding) as file:
         header_lines = [next(file) for _ in range(n_header_lines)]
     header = parse_header_lines(header_lines)
-    data = pd.read_csv(path, sep="\t", header=tag_idx)
-    return
+    raw_data = pd.read_csv(path, sep="\t", header=tag_idx)
+    dataset = parse_data(raw_data)
+    dataset.attrs |= header
+    if squeeze:
+        dataset = dataset.squeeze()
+    return dataset
 
 
 def find_tag(path: Path, tag: str, encoding: str = "utf-8"):
@@ -32,4 +37,5 @@ def find_tag(path: Path, tag: str, encoding: str = "utf-8"):
         for line_index, line in enumerate(file):
             if tag in line:
                 return line_index
-        raise RuntimeError(f"Tag {tag} not found in {path}")
+        msg = f"Tag {tag} not found in {path}"
+        raise RuntimeError(msg)

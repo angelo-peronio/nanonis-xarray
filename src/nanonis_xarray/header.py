@@ -2,6 +2,7 @@
 
 import re
 from datetime import datetime
+from pathlib import Path
 
 from . import unit_registry
 from .autonesting_dict import AutonestingDict
@@ -62,6 +63,8 @@ def parse_value(keys, value):
             value = value.split(";")
         case ["Scan", "Scanfield"]:
             value = [float(chunk) for chunk in value.split(";")]
+        case ["NanonisMain", "Session Path"]:
+            value = Path(value)
     return keys, value
 
 
@@ -81,12 +84,11 @@ def parse_bool_int_float(value: str):
         return value
 
 
-unit_regexp = re.compile(r"(?P<key>.*) \((?P<unit>.*)\)$")
+units_regexp = re.compile(r"(?P<key>.*) \((?P<units>.*)\)$")
 
 
 def split_unit(key):
     """Extract physical unit from header key."""
-    if match := unit_regexp.match(key):
-        return match.group("key"), match.group("unit")
-    else:
-        return key, None
+    if match := units_regexp.match(key):
+        return match.group("key"), match.group("units")
+    return key, None
