@@ -1,24 +1,41 @@
-repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.6.0"
-    hooks:
-      - id: check-added-large-files
-      - id: check-case-conflict
-      - id: check-merge-conflict
-      - id: check-symlinks
-      - id: check-yaml
-      - id: debug-statements
-      - id: end-of-file-fixer
-      - id: mixed-line-ending
-      - id: name-tests-test
-        args: ["--pytest-test-first"]
-      - id: trailing-whitespace
-        exclude: "tests/data/.*"
-      - id: check-vcs-permalinks
-      - id: fix-byte-order-marker
+ci:
+    autoupdate_commit_msg: "Update pre-commit hooks"
 
-  - repo: https://github.com/asottile/pyupgrade
-    rev: "v3.16.0"
-    hooks:
-      - id: pyupgrade
-        args: [--py310-plus]
+repos:
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      rev: "v0.6.9"
+      hooks:
+          - id: ruff
+            args: ["--fix", "--show-fixes"]
+          - id: ruff-format
+
+    - repo: https://github.com/rbubley/mirrors-prettier
+      rev: "v3.3.3"
+      hooks:
+          - id: prettier
+            types_or: [toml, yaml]
+
+    # - repo: https://github.com/pre-commit/mirrors-mypy
+    #   rev: "v1.12.0"
+    #   hooks:
+    #     - id: mypy
+    #       # Dependencies needed for their types.
+    #       additional_dependencies: [nox, numpy, pytest]
+
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: "v5.0.0"
+      hooks:
+          - id: check-added-large-files
+          - id: check-case-conflict
+          - id: check-merge-conflict
+          - id: check-symlinks
+          - id: check-yaml
+          - id: debug-statements
+          - id: end-of-file-fixer
+          - id: mixed-line-ending
+          - id: name-tests-test
+            args: ["--pytest-test-first"]
+          - id: trailing-whitespace
+            exclude: "tests/data/.*"
+          - id: check-vcs-permalinks
+          - id: fix-byte-order-marker
