@@ -8,7 +8,7 @@ from functools import reduce
 def autonesting_defaultdict_factory():
     """Return a defaultdict, whose default_factory returns a defaultdict, ...
 
-    ...whose default_factory returns a defaultdict,
+    ... whose default_factory returns a defaultdict,
     whose default_factory returns a defaultdict,
     whose default_factory returns a defaultdict, ...
     """
