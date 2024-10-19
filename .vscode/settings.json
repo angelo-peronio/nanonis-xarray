@@ -1,4 +1,14 @@
 {
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    // https://stackoverflow.com/a/75988836
+    "editor.detectIndentation": false,
     "python.testing.pytestArgs": [
         "tests"
     ],
