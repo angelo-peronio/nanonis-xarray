@@ -6,37 +6,46 @@ keywords = [
     "Nanonis",
     "SPECS",
     "xarray",
-    "STM",
-    "STS",
-    "SPS",
-    "AFM",
     "Scanning Tunnelling Microscopy",
+    "STM",
+    "Inelastic Electron Tunnelling Spectroscopy",
+    "STM-IETS",
     "Scanning Tunnelling Spectroscopy",
+    "STS",
     "Scanning Probe Spectroscopy",
+    "SPS",
     "Atomic Force Microscopy",
+    "AFM",
 ]
 dynamic = ["version"]
 readme = "README.md"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python :: 3",
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: File Formats",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
 ]
 # Scientific Python reccomendation on Python and xarray versions to support.
 # <https://scientific-python.org/specs/spec-0000/>
 # Upgrade the pyupgrade configuration in .pre-commit.config.yaml accordingly.
-requires-python = ">= 3.10"
-dependencies = ["xarray >= 2022.6.0", "pint >= 0.24"]
+requires-python = ">= 3.11"
+dependencies = ["xarray >= 2022.11.0", "pint >= 0.24"]
 optional-dependencies.dev = [
     "build",
+    "mypy",
     "pre-commit",
+    "nox",
     "ruff",
-    "twine",
     "nanonis-xarray[test]",
 ]
 optional-dependencies.test = ["pytest", "pytest-cov"]
@@ -59,20 +68,39 @@ tag_regex = '^(?P<version>v?\d+\.\d+\.\d+)$'
 local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib", "--cov=nanonis_xarray"]
-
-[tool.ruff]
-src = ["src"]
+addopts = [
+    "-ra",
+    "--import-mode=importlib",
+    "--strict-config",
+    "--strict-markers",
+]
+filterwarnings = ["error"]
+log_cli_level = "DEBUG"
+minversion = "7"
+xfail_strict = true
+testpaths = ["tests"]
 
 [tool.ruff.lint]
 extend-select = ["ALL"]
 ignore = [
-    "ANN",    # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+    # "ANN",    # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
     "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
-    "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
+    # "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
 ]
 extend-per-file-ignores."tests/*.py" = [
-    "S101",    # https://docs.astral.sh/ruff/rules/assert/
-    "PLR2004", # https://docs.astral.sh/ruff/rules/magic-value-comparison/
+    "S101", # https://docs.astral.sh/ruff/rules/assert/
+    # "PLR2004", # https://docs.astral.sh/ruff/rules/magic-value-comparison/
 ]
 pydocstyle.convention = "numpy"
+
+[tool.mypy]
+files = ["src", "tests", "noxfile.py"]
+strict = true
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.uv]
+# uv should not cache gsffile.
+# See e.g. warning at
+# <https://nox.thea.codes/en/stable/usage.html#changing-the-sessions-default-backend>
+reinstall-package = ["nanonis-xarray"]
