@@ -5,7 +5,7 @@ import pytest
 from nanonis_xarray.autonesting_dict import AutonestingDict
 
 
-def test_autonesting_dict():
+def test_autonesting_dict() -> None:
     """Test AutoNestingDict."""
     adict = AutonestingDict()
 

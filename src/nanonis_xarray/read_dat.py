@@ -11,7 +11,7 @@ from .header import parse_header_lines
 _encoding = "utf-8"
 
 
-def read_dat(path: Path | str, *, squeeze=True) -> xr.Dataset:
+def read_dat(path: Path | str, *, squeeze: bool = True) -> xr.Dataset:
     """Read a Nanonis .dat file into an xarray Dataset."""
     path = Path(path)
     tag_idx = find_tag(path, "[DATA]", encoding=_encoding)
@@ -27,7 +27,7 @@ def read_dat(path: Path | str, *, squeeze=True) -> xr.Dataset:
     return dataset
 
 
-def find_tag(path: Path, tag: str, encoding: str = "utf-8"):
+def find_tag(path: Path, tag: str, encoding: str = "utf-8") -> int:
     """Search for a tag within a text file.
 
     Return the 0-based line index of the first line containing the tag.

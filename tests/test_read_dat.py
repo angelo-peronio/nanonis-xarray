@@ -9,25 +9,38 @@ from nanonis_xarray import unit_registry as u
 data_folder = Path(__file__).parent / "data"
 
 
-def test_read_dat():
+def test_a() -> None:
     """Test read_dat."""
-    all_paths = data_folder.glob("*.dat")
-    all_data = {path.stem: read_dat(path) for path in all_paths}
+    data_path = data_folder / "a.dat"
+    data = read_dat(data_path)
 
-    assert "repetiton" not in all_data["a"].data_vars
-    assert "direction" not in all_data["a"].data_vars
-    assert all_data["a"].attrs["Bias Spectroscopy"]["MultiLine Settings"][
+    assert "repetiton" not in data.data_vars
+    assert "direction" not in data.data_vars
+    assert data.attrs["Bias Spectroscopy"]["MultiLine Settings"][
         "Integration"
     ] == 0.1 * u("ms")
+    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.attrs["Date"], datetime)
 
-    assert "repetiton" not in all_data["df_v"].data_vars
-    assert all_data["df_v"].direction.size == 2
 
-    assert all_data["z"].attrs["Bias Spectroscopy"]["backward sweep"] is True
+def test_df_v() -> None:
+    """Test read_dat."""
+    data_path = data_folder / "df_v.dat"
+    data = read_dat(data_path)
 
-    assert all_data["z"].repetition.size == 3
-    assert all_data["z"].direction.size == 2
+    assert "repetiton" not in data.data_vars
+    assert data.direction.size == 2
+    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.attrs["Date"], datetime)
 
-    for data in all_data.values():
-        assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
-        assert isinstance(data.attrs["Date"], datetime)
+
+def test_z() -> None:
+    """Test read_dat."""
+    data_path = data_folder / "z.dat"
+    data = read_dat(data_path)
+
+    assert data.attrs["Bias Spectroscopy"]["backward sweep"] is True
+    assert data.repetition.size == 3
+    assert data.direction.size == 2
+    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.attrs["Date"], datetime)
