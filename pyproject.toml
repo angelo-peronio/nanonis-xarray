@@ -42,7 +42,7 @@ classifiers = [
 # 2024-10-21 Pint does not work on Python 3.13.
 # https://github.com/hgrecco/pint/issues/1969
 requires-python = ">= 3.10, < 3.13"
-dependencies = ["xarray >= 2022.11.0", "pint >= 0.24"]
+dependencies = ["xarray >= 2022.11", "pint >= 0.24"]
 optional-dependencies.dev = [
     "build",
     "mypy",
@@ -91,8 +91,8 @@ ignore = [
     # "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
 ]
 extend-per-file-ignores."tests/*.py" = [
-    "S101", # https://docs.astral.sh/ruff/rules/assert/
-    # "PLR2004", # https://docs.astral.sh/ruff/rules/magic-value-comparison/
+    "S101",    # https://docs.astral.sh/ruff/rules/assert/
+    "PLR2004", # https://docs.astral.sh/ruff/rules/magic-value-comparison/
 ]
 pydocstyle.convention = "numpy"
 
