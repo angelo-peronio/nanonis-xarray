@@ -43,13 +43,15 @@ else {
 $ProjectName = Split-Path $ProjectRootFolder -Leaf
 $VenvFolder = Join-Path $VenvsRootFolder $ProjectName
 
+Push-Location $ProjectRootFolder
+
 uv venv --python=$PythonVersion $VenvFolder
 
-Push-Location $ProjectRootFolder
 if (Test-Path -Path pyproject.toml -PathType Leaf) {
     "Found pyproject.toml. Installing..." | Write-Host
     uv pip install --python=$VenvFolder --editable .[dev]
 }
+
 if (Test-Path -Path requirements.txt -PathType Leaf) {
     "Found requirements.txt. Installing..." | Write-Host
     uv pip install --python=$VenvFolder --requirement requirements.txt
