@@ -38,9 +38,11 @@ def get_python_versions(pyproject: dict[str, Any]) -> list[str]:
 
 python_versions = get_python_versions(pyproject)
 
-# TODO: read from pyproject.
-oldest_numpy = "1.24"
-oldest_xarray = "2022.11"
+# The old xarray is not compatible with NumPy 2.0. We pin the oldest NumPy recommended
+# by scientific Python <https://scientific-python.org/specs/spec-0000/>.
+oldest_deps = [
+    spec.replace(">=", "==") for spec in pyproject["project"]["dependencies"]
+] + ["numpy==1.24"]
 
 
 @nox.session(python=python_versions)
@@ -53,11 +55,7 @@ def test_python(session: Session) -> None:
 @nox.session(python=python_versions[0])
 def test_oldest(session: Session) -> None:
     """Test the oldest supported versions of Python and the dependencies."""
-    session.install(
-        f"numpy=={oldest_numpy}",
-        f"xarray=={oldest_xarray}",
-        ".[test]",
-    )
+    session.install(*oldest_deps, ".[test]")
     session.run("pytest")
 
 
@@ -67,4 +65,4 @@ def coverage(session: Session) -> None:
     # We generate XML because Codecov would convert it to XML anyway.
     # Coverage analysis slows down the testing, so we do it only once.
     session.install(".[test]")
-    session.run("pytest", "--cov=gsffile", "--cov-report=xml")
+    session.run("pytest", "--cov=nanonis_xarray", "--cov-report=xml")

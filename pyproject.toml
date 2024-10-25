@@ -36,12 +36,13 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
     "Typing :: Typed",
 ]
-# Scientific Python reccomendation on Python and xarray versions to support.
+# Scientific Python recommendation on versions to support:
 # <https://scientific-python.org/specs/spec-0000/>
-# Upgrade the pyupgrade configuration in .pre-commit.config.yaml accordingly.
 # 2024-10-21 Pint does not work on Python 3.13.
 # https://github.com/hgrecco/pint/issues/1969
 requires-python = ">= 3.10, < 3.13"
+# Before attempting stunts here, consider the fragile logic
+# for oldest_deps in noxfile.py.
 dependencies = ["xarray >= 2022.11", "pint >= 0.24"]
 optional-dependencies.dev = [
     "build",
