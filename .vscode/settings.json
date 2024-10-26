@@ -14,5 +14,16 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.analysis.typeCheckingMode": "off"
+    "python.analysis.typeCheckingMode": "off",
+    "cSpell.words": [
+        "adict",
+        "autonesting",
+        "Codecov",
+        "envdir",
+        "Mimea",
+        "nanonis",
+        "Rescipy",
+        "subkey",
+        "xarray"
+    ]
 }

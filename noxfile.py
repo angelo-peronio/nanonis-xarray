@@ -14,8 +14,6 @@ nox.options.envdir = Path(gettempdir()) / "nox"
 nox.options.error_on_missing_interpreters = True
 nox.options.error_on_external_run = True
 
-pyproject = nox.project.load_toml("pyproject.toml")
-
 
 def version_tuple(version: str) -> tuple[int, ...]:
     """'1.24' --> (1, 24)."""
@@ -36,8 +34,8 @@ def get_python_versions(pyproject: dict[str, Any]) -> list[str]:
     return sorted(python_versions, key=version_tuple)
 
 
+pyproject = nox.project.load_toml("pyproject.toml")
 python_versions = get_python_versions(pyproject)
-
 # The old xarray is not compatible with NumPy 2.0. We pin the oldest NumPy recommended
 # by scientific Python <https://scientific-python.org/specs/spec-0000/>.
 oldest_deps = [
@@ -53,7 +51,7 @@ def test_python(session: Session) -> None:
 
 
 @nox.session(python=python_versions[0])
-def test_oldest(session: Session) -> None:
+def test_oldest_deps(session: Session) -> None:
     """Test the oldest supported versions of Python and the dependencies."""
     session.install(*oldest_deps, ".[test]")
     session.run("pytest")
