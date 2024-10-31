@@ -25,5 +25,13 @@
         "Rescipy",
         "subkey",
         "xarray"
+    ],
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
     ]
 }

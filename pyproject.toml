@@ -51,8 +51,10 @@ optional-dependencies.dev = [
     "nox",
     "ruff",
     "nanonis-xarray[test]",
+    "nanonis-xarray[docs]",
 ]
 optional-dependencies.test = ["pytest", "pytest-cov"]
+optional-dependencies.docs = ["ipykernel", "ipympl"]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
