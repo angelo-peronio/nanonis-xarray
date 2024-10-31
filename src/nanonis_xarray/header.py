@@ -68,7 +68,7 @@ def parse_value(keys, value):
     return keys, value
 
 
-def parse_bool_int_float(value: str):
+def parse_bool_int_float(value: str) -> bool | int | float | str:
     """Attempt to parse a string into a bool, or an int, or a float."""
     if value == "TRUE":
         return True

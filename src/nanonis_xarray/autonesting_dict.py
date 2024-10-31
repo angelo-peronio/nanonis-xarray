@@ -3,9 +3,10 @@
 import operator
 from collections import abc, defaultdict
 from functools import reduce
+from typing import Any
 
 
-def autonesting_defaultdict_factory():
+def autonesting_defaultdict_factory() -> defaultdict:
     """Return a defaultdict, whose default_factory returns a defaultdict, ...
 
     ... whose default_factory returns a defaultdict,
@@ -16,7 +17,7 @@ def autonesting_defaultdict_factory():
     return defaultdict(autonesting_defaultdict_factory)
 
 
-def nested_defaultdict_to_dict(obj):
+def nested_defaultdict_to_dict(obj: Any) -> dict:  # noqa: ANN401
     """Convert a nested defaultdict to a dict."""
     # https://stackoverflow.com/a/26496899/11503785
     if isinstance(obj, defaultdict):
@@ -27,7 +28,7 @@ def nested_defaultdict_to_dict(obj):
 class AutonestingDict(abc.MutableMapping):
     """Auto-nesting dict, accessible also with a sequence of keys."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.autonesting_defaultdict = autonesting_defaultdict_factory()
 
     def __getitem__(self, key):
