@@ -14,7 +14,7 @@ def test_a() -> None:
     data_path = data_folder / "a.dat"
     data = read_dat(data_path)
 
-    assert "repetition" not in data.data_vars
+    assert "sweep" not in data.data_vars
     assert "direction" not in data.data_vars
     assert data.attrs["Bias Spectroscopy"]["MultiLine Settings"][
         "Integration"
@@ -28,7 +28,7 @@ def test_df_v() -> None:
     data_path = data_folder / "df_v.dat"
     data = read_dat(data_path)
 
-    assert "repetition" not in data.data_vars
+    assert "sweep" not in data.data_vars
     assert data.direction.size == 2
     assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
     assert isinstance(data.attrs["Date"], datetime)
@@ -40,7 +40,7 @@ def test_z() -> None:
     data = read_dat(data_path)
 
     assert data.attrs["Bias Spectroscopy"]["backward sweep"] is True
-    assert data.repetition.size == 3
+    assert data.sweep.size == 3
     assert data.direction.size == 2
     assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
     assert isinstance(data.attrs["Date"], datetime)
