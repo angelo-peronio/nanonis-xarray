@@ -21,11 +21,11 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     multi_labels = [
         {key: info[key] for key in (multi_label_keys)} for info in column_info
     ]
-    col_index = pd.MultiIndex.from_frame(pd.DataFrame(multi_labels))
-    data.columns = col_index
+    multi_index = pd.MultiIndex.from_frame(pd.DataFrame(multi_labels))
+    data.columns = multi_index
     # The first column is the independent variable of the measurement,
     # we use it as row index.
-    data = data.set_index(col_index[0])
+    data = data.set_index(multi_index[0])
     data.index.name = data.index.name[0]
     # Convert DataFrame -> Dataset
     data = data.stack(level=(1, 2), future_stack=True)  # noqa: PD013

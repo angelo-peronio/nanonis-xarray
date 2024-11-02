@@ -1,4 +1,4 @@
-"""Read a Nanonis .dat file into an xarray Dataset."""
+"""Read a Nanonis spectroscopy .dat file into a xarray Dataset."""
 
 from pathlib import Path
 
@@ -9,33 +9,27 @@ from .data import parse_data
 from .header import parse_header_lines
 
 _encoding = "utf-8"
+_data_tag = "[DATA]\n"
 
 
 def read_dat(path: Path | str, *, squeeze: bool = True) -> xr.Dataset:
-    """Read a Nanonis .dat file into an xarray Dataset."""
+    """Read a Nanonis spectroscopy .dat file into a xarray Dataset."""
     path = Path(path)
-    tag_idx = find_tag(path, "[DATA]", encoding=_encoding)
-    n_header_lines = tag_idx - 1
     with path.open(encoding=_encoding) as file:
-        header_lines = [next(file) for _ in range(n_header_lines)]
+        header_lines = []
+        for line in file:
+            if line == "\n":
+                continue
+            if line == _data_tag:
+                break
+            header_lines.append(line)
+        else:
+            msg = f"Invalid Nanonis file. Tag {_data_tag} not found in {path}"
+            raise RuntimeError(msg)
+        raw_data = pd.read_csv(file, sep="\t")
     header = parse_header_lines(header_lines)
-    raw_data = pd.read_csv(path, sep="\t", header=tag_idx)
     dataset = parse_data(raw_data)
     dataset.attrs |= header
     if squeeze:
         dataset = dataset.squeeze()
     return dataset
-
-
-def find_tag(path: Path, tag: str, encoding: str = "utf-8") -> int:
-    """Search for a tag within a text file.
-
-    Return the 0-based line index of the first line containing the tag.
-    Raise RuntimeError if the tag is not found.
-    """
-    with path.open(encoding=encoding) as file:
-        for line_index, line in enumerate(file):
-            if tag in line:
-                return line_index
-        msg = f"Tag {tag} not found in {path}"
-        raise RuntimeError(msg)

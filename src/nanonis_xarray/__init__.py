@@ -1,4 +1,4 @@
-"""Read a Nanonis .dat file into an xarray Dataset."""
+"""Read a Nanonis spectroscopy .dat file into an xarray Dataset."""
 
 from importlib.metadata import version
 
