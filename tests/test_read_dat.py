@@ -3,8 +3,9 @@
 from datetime import datetime
 from pathlib import Path
 
+from pint_xarray import unit_registry as u
+
 from nanonis_xarray import read_dat
-from nanonis_xarray import unit_registry as u
 
 data_folder = Path(__file__).parent / "data"
 

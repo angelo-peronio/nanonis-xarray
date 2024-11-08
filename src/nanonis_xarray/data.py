@@ -14,7 +14,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     data = data.drop(columns=[name for name in data.columns if "[AVG]" in name])
     column_info = [parse_column_label(label) for label in data.columns]
     # Create a multi-index for the columns.
-    multi_label_keys = ("name", "sweep", "direction")
+    multi_label_keys = ("name_norm", "sweep", "direction")
     multi_labels = [
         {key: info[key] for key in (multi_label_keys)} for info in column_info
     ]
@@ -27,13 +27,15 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     # Convert DataFrame -> Dataset
     data = data.stack(level=(1, 2), future_stack=True)  # noqa: PD013
     dataset = xr.Dataset.from_dataframe(data)
-    dataarray_attrs = {
-        info["name"]: {"long_name": info["name"], "units": info["unit_str"]}
-        for info in column_info
-    }
-    for name in dataset.data_vars:
-        dataset[name].attrs |= dataarray_attrs[name]
-    return dataset
+    # Set attributes.
+    for info in column_info:
+        dataset[info["name_norm"]].attrs |= {
+            "long_name": info["name"],
+            "units": info["unit_str"],
+        }
+    # Enable pint phyisical units.
+    dataset = dataset.pint.quantify()
+    return dataset  # noqa: RET504
 
 
 @dataclass(frozen=True)
