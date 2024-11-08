@@ -6,9 +6,6 @@ from typing import Literal
 
 import pandas as pd
 import xarray as xr
-from pint import Unit
-
-from . import unit_registry
 
 
 def parse_data(data: pd.DataFrame) -> xr.Dataset:
@@ -31,7 +28,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     data = data.stack(level=(1, 2), future_stack=True)  # noqa: PD013
     dataset = xr.Dataset.from_dataframe(data)
     dataarray_attrs = {
-        info["name"]: {key: info[key] for key in ("long_name", "units")}
+        info["name"]: {"long_name": info["name"], "units": info["unit_str"]}
         for info in column_info
     }
     for name in dataset.data_vars:
@@ -46,24 +43,24 @@ class ColumnInfo:
     Attributes
     ----------
     name: str
-        Channel name, normalized.
-    long_name: str
         Channel name, not normalized.
+    name_norm: str
+        Channel name, normalized.
     sweep: int
         Sweep (repetition) index, 1-based.
     direction: Literal["fw", "bw"]
         Sweep direction, forward ("fw") or backward ("bw")
-    units: Unit
+    unit_str: str
         Channel physical units.
     """
 
     name: str
-    long_name: str
+    name_norm: str
     sweep: int
     direction: Literal["fw", "bw"]
-    units: Unit
+    unit_str: str
 
-    def __getitem__(self, item: str) -> str | int | Unit:
+    def __getitem__(self, item: str) -> str | int:
         """Get an attribute, dict-like."""
         # https://stackoverflow.com/a/62561069
         return getattr(self, item)
@@ -73,7 +70,7 @@ _column_label_regexp = re.compile(
     r"^(?P<name>[^\[\(]+) "
     r"(?:\[(?P<sweep>\d{5})\] )?"
     r"(?:\[(?P<backward>bwd)\] )"
-    r"?\((?P<units>.*)\)"
+    r"?\((?P<unit_str>.*)\)"
 )
 
 
@@ -82,11 +79,11 @@ def parse_column_label(label: str) -> ColumnInfo:
     if matched := _column_label_regexp.match(label):
         sweep = int(matched.group("sweep")) if matched.group("sweep") else 1
         return ColumnInfo(
-            name=normalize(matched.group("name")),
-            long_name=matched.group("name"),
+            name=matched.group("name"),
+            name_norm=normalize(matched.group("name")),
             sweep=sweep,
             direction="bw" if matched.group("backward") else "fw",
-            units=unit_registry.Unit(matched.group("units")),
+            unit_str=matched.group("unit_str"),
         )
     msg = f"Column label '{label}' not in the expected format."
     raise ValueError(msg)
