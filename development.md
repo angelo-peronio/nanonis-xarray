@@ -2,11 +2,12 @@
 
 ## ToDo
 
-* Evaluate [`pint_xarray`](https://xarray.dev/blog/introducing-pint-xarray).
 * Use `example.py` to evaluate the user experience.
     * Plot.
     * Calculate averages.
     * Rotate lock-in x and y.
+* Evaluate [`pint_xarray`](https://xarray.dev/blog/introducing-pint-xarray).
+* Evaluate [`xarray_units`](https://github.com/astropenguin/xarray-units/)
 * Readme
 
 ## Ideas
