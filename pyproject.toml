@@ -28,9 +28,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    # 2024-10-21 Pint does not work on Python 3.13.
-    # https://github.com/hgrecco/pint/issues/1969
-    #"Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: File Formats",
     "Topic :: Scientific/Engineering :: Physics",
@@ -38,12 +36,10 @@ classifiers = [
 ]
 # Scientific Python recommendation on versions to support:
 # <https://scientific-python.org/specs/spec-0000/>
-# 2024-10-21 Pint does not work on Python 3.13.
-# https://github.com/hgrecco/pint/issues/1969
-requires-python = ">= 3.10, < 3.13"
+requires-python = ">= 3.10"
 # Before attempting stunts here, consider the fragile logic
 # for oldest_deps in noxfile.py.
-dependencies = ["xarray >= 2022.11", "pint >= 0.24"]
+dependencies = ["xarray >= 2022.11", "pint-xarray >= 0.4"]
 optional-dependencies.dev = [
     "build",
     "mypy",
@@ -54,7 +50,7 @@ optional-dependencies.dev = [
     "nanonis-xarray[docs]",
 ]
 optional-dependencies.test = ["pytest", "pytest-cov"]
-optional-dependencies.docs = ["ipykernel", "ipympl"]
+optional-dependencies.docs = ["ipykernel", "ipympl", "seaborn"]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
