@@ -24,7 +24,7 @@ def read_dat(path: Path | str, *, squeeze: bool = True) -> xr.Dataset:
                 break
             header_lines.append(line)
         else:
-            msg = f"Invalid Nanonis file. Tag {_data_tag} not found in {path}"
+            msg = f"Invalid Nanonis .dat file. Tag {_data_tag} not found in {path}"
             raise RuntimeError(msg)
         raw_data = pd.read_csv(file, sep="\t")
     header = parse_header_lines(header_lines)

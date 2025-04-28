@@ -16,6 +16,8 @@ data_path = project_root / "tests" / "data" / "z.dat"
 data = read_dat(data_path)
 data
 # %%
+print(data.coords["z_rel"].attrs)
+# %%
 fig, ax = plt.subplots()
 data["current"].sel(sweep=2, direction="fw").pint.dequantify(format="~P").plot()
 # %%
