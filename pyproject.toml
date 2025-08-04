@@ -4,6 +4,7 @@ description = "Read a Nanonis spectroscopy .dat file into a xarray Dataset"
 authors = [{ name = "Angelo Peronio" }]
 keywords = [
     "Nanonis",
+    "Mimea",
     "SPECS",
     "xarray",
     "Scanning Tunnelling Microscopy",
@@ -29,6 +30,8 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    # Wait for NumPy and pandas to publish their wheel for a new Python version
+    # before supporting it.
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: File Formats",
     "Topic :: Scientific/Engineering :: Physics",
@@ -36,21 +39,23 @@ classifiers = [
 ]
 # Scientific Python recommendation on versions to support:
 # <https://scientific-python.org/specs/spec-0000/>
-requires-python = ">= 3.10"
+requires-python = ">= 3.11"
 # Before attempting stunts here, consider the fragile logic
 # for oldest_deps in noxfile.py.
-dependencies = ["xarray >= 2022.11", "pint-xarray >= 0.4"]
-optional-dependencies.dev = [
+dependencies = ["numpy >= 1.26", "xarray >= 2023.9.0", "pint-xarray >= 0.4"]
+
+[dependency-groups]
+dev = [
     "build",
     "mypy",
     "pre-commit",
     "nox",
     "ruff",
-    "nanonis-xarray[test]",
-    "nanonis-xarray[docs]",
+    { include-group = "test" },
+    { include-group = "docs" },
 ]
-optional-dependencies.test = ["pytest", "pytest-cov"]
-optional-dependencies.docs = ["ipykernel", "ipympl", "seaborn"]
+test = ["pytest", "pytest-cov"]
+docs = ["ipykernel", "ipympl", "seaborn"]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]

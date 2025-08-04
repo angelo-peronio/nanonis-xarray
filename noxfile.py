@@ -36,24 +36,24 @@ def get_python_versions(pyproject: dict[str, Any]) -> list[str]:
 
 pyproject = nox.project.load_toml("pyproject.toml")
 python_versions = get_python_versions(pyproject)
-# The old xarray is not compatible with NumPy 2.0. We pin the oldest NumPy recommended
-# by scientific Python <https://scientific-python.org/specs/spec-0000/>.
+# 2025-04-08 Pandas does not run neither on PyPy, nor on free-threaded CPython.
+more_python_versions = []
 oldest_deps = [
     spec.replace(">=", "==") for spec in pyproject["project"]["dependencies"]
-] + ["numpy==1.24"]
+]
 
 
-@nox.session(python=python_versions)
+@nox.session(python=python_versions + more_python_versions)
 def test_python(session: Session) -> None:
     """Test the supported Python versions."""
-    session.install(".[test]")
+    session.install("--group=test", ".")
     session.run("pytest")
 
 
 @nox.session(python=python_versions[0])
 def test_oldest_deps(session: Session) -> None:
     """Test the oldest supported versions of Python and the dependencies."""
-    session.install(*oldest_deps, ".[test]")
+    session.install(*oldest_deps, "--group=test", ".")
     session.run("pytest")
 
 
@@ -62,5 +62,5 @@ def coverage(session: Session) -> None:
     """Generate test coverage report."""
     # We generate XML because Codecov would convert it to XML anyway.
     # Coverage analysis slows down the testing, so we do it only once.
-    session.install(".[test]")
+    session.install("--group=test", ".")
     session.run("pytest", "--cov=nanonis_xarray", "--cov-report=xml")
