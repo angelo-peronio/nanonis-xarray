@@ -1,14 +1,17 @@
-# Development notes for nanonis-xarray
+# Development notes for `nanonis-xarray`
 
 ## ToDo
 
+* Publish
+* CI
+* units as text
 * Use `example.py` to evaluate the user experience.
     * Plot.
     * Calculate averages.
     * Rotate lock-in x and y.
+* xarray extension
 * Evaluate [`pint_xarray`](https://xarray.dev/blog/introducing-pint-xarray).
 * Evaluate [`xarray_units`](https://github.com/astropenguin/xarray-units/)
-* Readme
 
 ## Ideas
 
@@ -26,5 +29,5 @@
 
 * It seems Nanonis ships Python routines <https://www.specs-group.com/nanonis/products/mimea/mimea-software/#c1315>
 * Nanonis has two packages on PyPI:
-    * <https://pypi.org/project/nanonis-tramea/>
-    * <https://pypi.org/project/nanonis-spm/>
+    * [`nanonis-tramea`](https://pypi.org/project/nanonis-tramea/)
+    * [`nanaonis-spm`](https://pypi.org/project/nanonis-spm/)
