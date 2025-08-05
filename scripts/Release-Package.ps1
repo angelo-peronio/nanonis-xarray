@@ -1,18 +1,20 @@
 #Requires -Version 7.4
 <#
     .SYNOPSIS
-    Tag a release and push to remotes/origin.
+    Tag a release and push to origin.
 
     .DESCRIPTION
     Tag a release and push to remotes/origin.
-    A GitHub action will then build, test, and release on PyPI.
+    A CI pipeline will then build, test, and release.
 
     .EXAMPLE
     PS> .\scripts\Release-Package -Version 0.1.0
 
     .NOTES
-    Known bug: will fail if encounters a git tag different
-    from a version tag "v[major].[minor].[patch]".
+    Known bugs:
+    * fails if encounters a git tag different
+      from a version tag: "v[major].[minor].[patch]".
+    * fails if no version tags already exist.
 #>
 
 

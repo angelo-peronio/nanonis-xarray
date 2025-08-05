@@ -1,7 +1,7 @@
 #Requires -Version 7.4
 <#
     .SYNOPSIS
-    Create a Python virtual enviroment.
+    Create a Python virtual environment.
 
     .DESCRIPTION
     Usage:
@@ -9,7 +9,7 @@
         * set the default values of the parameters at your convenience,
         * execute.
     If a `pyproject.toml` is found, also installs the corresponding package
-    in editable mode, including its "dev" optional dependencies.
+    in editable mode, including its "dev" dependency group.
     If a `requirements.txt` is found, also installs the packages listed therein.
     The virtual enviroment is replaced if it already exists.
     Placing the environment outside the project folder avoids synchronization issues
