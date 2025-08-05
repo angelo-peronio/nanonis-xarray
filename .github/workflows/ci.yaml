@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/nanonis-xarray
+      url: https://test.pypi.org/p/${{ github.repository }}
     permissions:
       id-token: write # Mandatory for trusted publishing
 
@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/nanonis-xarray
+      url: https://pypi.org/p/${{ github.repository }}
     permissions:
       id-token: write
 
@@ -121,7 +121,7 @@ jobs:
           --repo '${{ github.repository }}'
           --notes ""
 
-      - name: Upload artifact signatures to GitHub Release
+      - name: Upload artifacts to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
