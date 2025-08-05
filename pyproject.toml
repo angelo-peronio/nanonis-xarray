@@ -49,6 +49,7 @@ dev = [
     "build",
     "mypy",
     "pre-commit",
+    "pre-commit-uv",
     "nox",
     "ruff",
     { include-group = "test" },
