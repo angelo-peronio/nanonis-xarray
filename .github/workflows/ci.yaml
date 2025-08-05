@@ -1,5 +1,7 @@
 name: ci
 
+permissions: {}
+
 on:
   push:
     branches:
@@ -62,7 +64,7 @@ jobs:
       name: testpypi
       url: https://test.pypi.org/p/${{ github.event.repository.name }}
     permissions:
-      id-token: write # Mandatory for trusted publishing
+      id-token: write # Mandatory for trusted publishing.
 
     steps:
       - name: Download the dists
@@ -103,7 +105,7 @@ jobs:
     needs: publish-to-pypi
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Mandatory for making GitHub Releases
+      contents: write # Mandatory for GitHub releases.
 
     steps:
       - name: Download the dists
