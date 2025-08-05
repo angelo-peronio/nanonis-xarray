@@ -1,13 +1,13 @@
 name: ci
 
-permissions: {}
+permissions: {} # No default permissions.
 
 on:
   push:
     branches:
       - "**" # All branches
     tags:
-      - v[0-9]+.[0-9]+.[0-9]+ # Release tags, like v0.1.2
+      - v[0-9]+.[0-9]+.[0-9]+ # Release tags, e.g. v0.1.2
   pull_request:
     branches:
       - master
