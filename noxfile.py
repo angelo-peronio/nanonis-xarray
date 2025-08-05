@@ -63,4 +63,4 @@ def coverage(session: Session) -> None:
     # We generate XML because Codecov would convert it to XML anyway.
     # Coverage analysis slows down the testing, so we do it only once.
     session.install("--group=test", ".")
-    session.run("pytest", "--cov=nanonis_xarray", "--cov-report=xml")
+    session.run("pytest", "--cov=nanonis_xarray", "--cov-branch", "--cov-report=xml")
