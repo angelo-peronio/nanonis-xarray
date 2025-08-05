@@ -9,41 +9,41 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FORCE_COLOR: "1"  # Make tools pretty.
+  FORCE_COLOR: "1" # Make tools pretty.
 
 jobs:
   build:
     name: Build and verify package
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout source code
-          uses: actions/checkout@v4
-          with:
-              fetch-depth: 0
-              persist-credentials: false
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
-        - name: Build and inspect Python package
-          uses: hynek/build-and-inspect-python-package@v2
-          id: baipp
+      - name: Build and inspect Python package
+        uses: hynek/build-and-inspect-python-package@v2
+        id: baipp
 
   test:
-      name: Test
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout source code
-          uses: actions/checkout@v4
-          with:
-            persist-credentials: false
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-        - name: Setup uv
-          uses: astral-sh/setup-uv@v6
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
 
-        - name: Test package
-          run: uvx nox
+      - name: Test package
+        run: uvx nox
 
-        - name: Upload coverage reports to Codecov
-          uses: codecov/codecov-action@v5
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            fail_ci_if_error: true
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true

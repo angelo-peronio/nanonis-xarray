@@ -17,7 +17,7 @@ def autonesting_defaultdict_factory() -> defaultdict:
     return defaultdict(autonesting_defaultdict_factory)
 
 
-def nested_defaultdict_to_dict(obj: Any) -> dict:  # noqa: ANN401
+def nested_defaultdict_to_dict(obj: Any) -> dict:
     """Convert a nested defaultdict to a dict."""
     # https://stackoverflow.com/a/26496899/11503785
     if isinstance(obj, defaultdict):

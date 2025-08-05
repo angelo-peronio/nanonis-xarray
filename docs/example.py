@@ -1,3 +1,6 @@
+"""Usage of nanonis_xarray."""
+
+# ruff: noqa: INP001, B018, T201
 # %%
 # ! %reload_ext autoreload
 # ! %autoreload complete
