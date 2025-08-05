@@ -6,7 +6,8 @@ on:
   - workflow_call
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # https://github.com/orgs/community/discussions/30708#discussioncomment-3518412
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 env:
