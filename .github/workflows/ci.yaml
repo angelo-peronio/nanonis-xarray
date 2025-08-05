@@ -8,6 +8,9 @@ on:
       - "**" # All branches
     tags:
       - v[0-9]+.[0-9]+.[0-9]+ # Release tags, like v0.1.2
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 concurrency:
