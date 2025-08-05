@@ -1,6 +1,10 @@
 # Read Nanonis spectroscopy `.dat` files into xarray Datasets
 
+[![license](https://img.shields.io/github/license/angelo-peronio/nanonis-xarray)](https://github.com/angelo-peronio/nanonis-xarray/blob/master/LICENSE)
 [![SPEC 0 — Minimum Supported Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-python.org/specs/spec-0000/)
+[![ci](https://github.com/angelo-peronio/nanonis-xarray/actions/workflows/ci.yaml/badge.svg)](https://github.com/angelo-peronio/nanonis-xarray/actions/workflows/ci.yaml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/angelo-peronio/nanonis-xarray/master.svg)](https://results.pre-commit.ci/latest/github/angelo-peronio/nanonis-xarray/master)
+[![codecov](https://codecov.io/github/angelo-peronio/nanonis-xarray/graph/badge.svg)](https://codecov.io/github/angelo-peronio/nanonis-xarray)
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 
 `nanonis_xarray` is a Python module to read spectroscopy measurements saved in text
