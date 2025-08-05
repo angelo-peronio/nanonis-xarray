@@ -108,7 +108,7 @@ warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [tool.uv]
-# uv should not cache gsffile.
+# uv should not cache this package.
 # See e.g. warning at
 # <https://nox.thea.codes/en/stable/usage.html#changing-the-sessions-default-backend>
 reinstall-package = ["nanonis-xarray"]
