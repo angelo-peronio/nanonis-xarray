@@ -1,4 +1,4 @@
-name: ci
+name: publish
 
 on:
   push:
@@ -50,7 +50,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     environment:
-      name: pypy
+      name: pypi
       url: https://pypi.org/p/gsffile
     permissions:
       id-token: write
