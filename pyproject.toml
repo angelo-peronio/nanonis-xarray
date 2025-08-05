@@ -22,7 +22,7 @@ keywords = [
 dynamic = ["version"]
 readme = "README.md"
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Natural Language :: English",
     "Operating System :: OS Independent",
@@ -30,8 +30,8 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    # Wait for NumPy and pandas to publish their wheel for a new Python version
-    # before supporting it.
+    # Wait for NumPy and pandas to publish their compiled wheels
+    # for a new Python version before supporting it.
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: File Formats",
     "Topic :: Scientific/Engineering :: Physics",
