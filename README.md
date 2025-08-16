@@ -25,17 +25,16 @@ It becomes then easy to e.g. plot the average of one measured channel in the for
 
 ```python
 from matplotlib import pyplot as plt
+import xarray as xr
 
-from nanonis_xarray import read_dat
-
-data = read_dat("tests/data/z.dat")
+data = xr.opne_dataset("tests/data/z.dat")
 fig, ax = plt.subplots()
 data["current"].mean(dim=["sweep"]).sel(direction="fw").plot()
 ```
 
-## Work in progress
+## 🚧 Work in progress 🚧
 
-This library is under development: expect breaking changes. I do not plan to support the Nanonis binary formats (`.sxm`, `.3ds`), which can be read by similar projects:
+This library is under development: expect breaking changes. Nanonis binary formats (`.sxm`, `.3ds`) are currently not supported, and can be read by similar projects:
 
 * [`nanonispy2`](https://github.com/ceds92/nanonispy2)
 * [`xarray-nanonis`](https://github.com/John3859/xarray-nanonis)

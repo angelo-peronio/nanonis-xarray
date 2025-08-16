@@ -58,6 +58,9 @@ dev = [
 test = ["pytest", "pytest-cov"]
 docs = ["ipykernel", "ipympl", "seaborn"]
 
+[project.entry-points."xarray.backends"]
+nanonis_dat = "nanonis_xarray.nanonis_dat_backend_entrypoint:NanonisDatBackendEntrypoint"
+
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
@@ -93,6 +96,7 @@ extend-select = ["ALL"]
 ignore = [
     "ANN",    # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
     "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
+    "RET504", # https://docs.astral.sh/ruff/rules/unnecessary-assign/
     # "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
 ]
 extend-per-file-ignores."tests/*.py" = [

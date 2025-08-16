@@ -8,15 +8,14 @@
 from pathlib import Path
 
 import seaborn as sns
+import xarray as xr
 from matplotlib import pyplot as plt
-
-from nanonis_xarray import read_dat
 
 sns.set_theme()
 
 project_root = Path(__file__).parents[1]
 data_path = project_root / "tests" / "data" / "z.dat"
-data = read_dat(data_path)
+data = xr.open_dataset(data_path)
 data
 # %%
 print(data.coords["z_rel"].attrs)

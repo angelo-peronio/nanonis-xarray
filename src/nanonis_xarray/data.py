@@ -35,7 +35,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
         }
     # Enable pint phyisical units.
     dataset = dataset.pint.quantify()
-    return dataset  # noqa: RET504
+    return dataset
 
 
 @dataclass(frozen=True)

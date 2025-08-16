@@ -16,7 +16,6 @@
 
 * Do we want to normalize the header keys?
 * Do we want to have the header to be accessible like `data.attrs.key.subkey`?
-* Xarray [accessors](https://docs.xarray.dev/en/stable/internals/extending-xarray.html).
 
 ## Prio 2
 
