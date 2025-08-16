@@ -1,6 +1,8 @@
 # Read Nanonis spectroscopy .dat files into xarray Datasets
 
 [![pypi](https://img.shields.io/pypi/v/nanonis-xarray)](https://pypi.org/project/nanonis-xarray/)
+[![conda-forge](https://img.shields.io/conda/vn/conda-forge/nanonis-xarray)](https://anaconda.org/conda-forge/nanonis-xarray)
+[![pypi downloads](https://img.shields.io/pypi/dm/nanonis-xarray)](https://pypistats.org/packages/nanonis-xarray)
 [![license](https://img.shields.io/github/license/angelo-peronio/nanonis-xarray)](https://github.com/angelo-peronio/nanonis-xarray/blob/master/LICENSE)
 [![python](https://img.shields.io/pypi/pyversions/nanonis-xarray)](https://pypi.org/project/nanonis-xarray/)
 [![SPEC 0 — Minimum Supported Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-python.org/specs/spec-0000/)

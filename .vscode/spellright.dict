@@ -7,3 +7,5 @@ fw
 bw
 PyPI
 codecov
+conda
+TestPyPI

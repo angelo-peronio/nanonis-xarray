@@ -2,12 +2,8 @@
 
 ## ToDo
 
-* CI
-    * All commits: build, test
-    * Build and test must succeed before merging into master
-    * Master: publish to TestPyPI
-    * Release tag: publish to PyPI
-* units as text
+* Decide dimension name: `sweep`, or `repetition`, or `rep`.
+* Units as text
 * Use `example.py` to evaluate the user experience.
     * Plot.
     * Calculate averages.
