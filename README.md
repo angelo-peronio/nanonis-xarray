@@ -1,4 +1,4 @@
-# Read Nanonis spectroscopy .dat files into xarray Datasets
+# Xarray plugin to read Nanonis spectroscopy .dat files
 
 [![pypi](https://img.shields.io/pypi/v/nanonis-xarray)](https://pypi.org/project/nanonis-xarray/)
 [![conda-forge](https://img.shields.io/conda/vn/conda-forge/nanonis-xarray)](https://anaconda.org/conda-forge/nanonis-xarray)
@@ -11,7 +11,7 @@
 [![codecov](https://codecov.io/github/angelo-peronio/nanonis-xarray/graph/badge.svg)](https://codecov.io/github/angelo-peronio/nanonis-xarray)
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 
-`nanonis_xarray` is a Python module to read spectroscopy measurements saved in text
+[`nanonis_xarray`](https://github.com/angelo-peronio/nanonis-xarray) is a [`xarray`](https://xarray.dev/) plugin to read spectroscopy measurements saved in text
 format (`.dat`) by a [Nanonis Mimea](https://www.specs-group.com/nanonis/products/mimea/)
 SPM control system from [SPECS Surface Nano Analysis GmbH](https://www.specs-group.com/).
 
@@ -21,15 +21,36 @@ The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/get
 * The sweep number, if the measurement has been repeated multiple times;
 * The sweep direction (forward or backward), if the independent variable has been swept in both directions.
 
-It becomes then easy to e.g. plot the average of one measured channel in the forward direction:
+```python
+>>> import xarray as xr
+
+>>> data = xr.open_dataset("tests/data/z.dat")
+>>> data.coords
+Coordinates:
+  * z_rel      (z_rel) float64 2kB -2.1e-10 -2.065e-10 ... 4.865e-10 4.9e-10
+  * sweep      (sweep) int64 24B 1 2 3
+  * direction  (direction) object 16B 'bw' 'fw'
+
+```
+
+The header of the measurement is stored in the `attrs` nested dictionary:
 
 ```python
-from matplotlib import pyplot as plt
-import xarray as xr
+>>> data.attrs["Z Spectroscopy"]["Number of sweeps"]
+3
+>>> data.attrs["Z Spectroscopy"]["backward sweep"]
+True
 
-data = xr.opne_dataset("tests/data/z.dat")
-fig, ax = plt.subplots()
-data["current"].mean(dim=["sweep"]).sel(direction="fw").plot()
+```
+
+Physical quantities are stored as [`pint.Quantity`](https://pint.readthedocs.io/en/stable/getting/tutorial.html#defining-a-quantity), timestamps as [`datetime.datetime`](https://docs.python.org/3/library/datetime.html#datetime-objects), and paths as [`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#basic-use):
+
+```python
+>>> data.attrs["NanonisMain"]["RT Frequency"]
+<Quantity(10000.0, 'hertz')>
+>>> data.attrs["Date"]
+datetime.datetime(2015, 3, 27, 11, 49, 5)
+
 ```
 
 ## 🚧 Work in progress 🚧
