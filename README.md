@@ -15,7 +15,7 @@
 format (`.dat`) by a [Nanonis Mimea](https://www.specs-group.com/nanonis/products/mimea/)
 SPM control system from [SPECS Surface Nano Analysis GmbH](https://www.specs-group.com/).
 
-The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/getting-started-guide/why-xarray.html#core-data-structures), where each measured quantity, such as tunnelling current or AFM oscillation amplitude, is a [`xarray.DataArray`](https://docs.xarray.dev/en/stable/user-guide/data-structures.html#dataarray) with up to three dimensions:
+The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/getting-started-guide/why-xarray.html#core-data-structures), where each measured channel (tunnelling current, AFM oscillation amplitude, …) is a [`xarray.DataArray`](https://docs.xarray.dev/en/stable/user-guide/data-structures.html#dataarray) with up to three dimensions:
 
 * The independent variable of the measurement, such as bias voltage or tip z position;
 * The sweep number, if the measurement has been repeated multiple times;
@@ -27,9 +27,17 @@ The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/get
 >>> data = xr.open_dataset("tests/data/z.dat")
 >>> data.coords
 Coordinates:
-  * z_rel      (z_rel) float64 2kB -2.1e-10 -2.065e-10 ... 4.865e-10 4.9e-10
+  * z_rel      (z_rel) float64 2kB [m] -2.1e-10 -2.065e-10 ... 4.865e-10 4.9e-10
   * sweep      (sweep) int64 24B 1 2 3
   * direction  (direction) object 16B 'bw' 'fw'
+
+```
+
+[pint-xarray](https://xarray.dev/blog/introducing-pint-xarray) is used to associate a physical unit to each channel, unless `xr.open_dataset()` is called with `quantify_vars=False`:
+
+```python
+>>> data["current"].pint.units
+<Unit('ampere')>
 
 ```
 

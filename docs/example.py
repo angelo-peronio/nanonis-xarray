@@ -21,7 +21,7 @@ data
 print(data.coords["z_rel"].attrs)
 # %%
 fig, ax = plt.subplots()
-data["current"].sel(sweep=2, direction="fw").pint.dequantify(format="~P").plot()
+data["current"].sel(sweep=2, direction="fw").plot()
 # %%
 fig, ax = plt.subplots()
 data["current"].mean(dim=["sweep"]).sel(direction="fw").pint.dequantify(

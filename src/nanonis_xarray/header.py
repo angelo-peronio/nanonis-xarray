@@ -4,8 +4,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from pint_xarray import unit_registry
-
+from . import unit_registry
 from .autonesting_dict import AutonestingDict
 
 # Nanonis quirk: these appear between round brackets like physical units, but are not.

@@ -13,9 +13,9 @@ from .read_dat import read_dat
 class NanonisDatBackendEntrypoint(BackendEntrypoint):
     """Xarray backend plugin."""
 
-    def open_dataset(self, filename_or_obj, *, drop_variables=None):
+    def open_dataset(self, filename_or_obj, *, drop_variables=None, **kwargs):
         """Read a Nanonis .dat file."""
-        dataset = read_dat(Path(filename_or_obj))
+        dataset = read_dat(Path(filename_or_obj), **kwargs)
         if drop_variables:
             dataset = dataset.drop_vars(drop_variables)
         return dataset
@@ -25,7 +25,12 @@ class NanonisDatBackendEntrypoint(BackendEntrypoint):
         path = Path(filename_or_obj)
         return path.suffix == ".dat"
 
-    open_dataset_parameters = ("filename_or_obj", "drop_variables")
+    open_dataset_parameters = (
+        "filename_or_obj",
+        "drop_variables",
+        "quantify_vars",
+        "squeeze",
+    )
 
     description = "Read Nanonis spectroscopy .dat files into xarray Datasets."
 

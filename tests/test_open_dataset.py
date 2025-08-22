@@ -1,12 +1,13 @@
-"""Test read_dat."""
+"""Test open_dataset."""
 
 from datetime import datetime
 from pathlib import Path
 
 import xarray as xr
-from pint_xarray import unit_registry as u
 
-data_folder = Path(__file__).parent / "data"
+from nanonis_xarray import unit_registry as u
+
+from .conftest import data_folder
 
 
 def test_a() -> None:
@@ -50,7 +51,27 @@ def test_drop_variables() -> None:
     """Test drop_variables parameter."""
     data_path = data_folder / "a.dat"
     data_1 = xr.open_dataset(data_path)
-    data_2 = xr.open_dataset(data_path, drop_variables="phase")
-
     assert "phase" in data_1
+
+    data_2 = xr.open_dataset(data_path, drop_variables="phase")
     assert "phase" not in data_2
+
+
+def test_squeeze() -> None:
+    """Test squeeze parameter."""
+    data_path = data_folder / "a.dat"
+    data_1 = xr.open_dataset(data_path)
+    assert len(data_1.dims) == 1
+
+    data_2 = xr.open_dataset(data_path, squeeze=False)
+    assert len(data_2.dims) == 3
+
+
+def test_quantify_vars() -> None:
+    """Test quantify_vars parameter."""
+    data_path = data_folder / "a.dat"
+    data_1 = xr.open_dataset(data_path)
+    assert data_1["current"].pint.units == u("ampere")
+
+    data_2 = xr.open_dataset(data_path, quantify_vars=False)
+    assert data_2["current"].pint.units is None

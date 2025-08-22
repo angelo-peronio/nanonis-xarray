@@ -33,8 +33,6 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
             "long_name": info["name"],
             "units": info["unit_str"],
         }
-    # Enable pint phyisical units.
-    dataset = dataset.pint.quantify()
     return dataset
 
 

@@ -12,7 +12,9 @@ _encoding = "utf-8"
 _data_tag = "[DATA]\n"
 
 
-def read_dat(path: Path | str, *, squeeze: bool = True) -> xr.Dataset:
+def read_dat(
+    path: Path | str, *, quantify_vars: bool = True, squeeze: bool = True
+) -> xr.Dataset:
     """Read a Nanonis spectroscopy .dat file into a xarray Dataset."""
     path = Path(path)
     with path.open(encoding=_encoding) as file:
@@ -30,6 +32,9 @@ def read_dat(path: Path | str, *, squeeze: bool = True) -> xr.Dataset:
     header = parse_header_lines(header_lines)
     dataset = parse_data(raw_data)
     dataset.attrs |= header
+    if quantify_vars:
+        # Enable pint phyisical units.
+        dataset = dataset.pint.quantify()
     if squeeze:
         dataset = dataset.squeeze()
     return dataset
