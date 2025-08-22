@@ -42,7 +42,7 @@ classifiers = [
 requires-python = ">= 3.11"
 # Before attempting stunts here, consider the fragile logic
 # for oldest_deps in noxfile.py.
-dependencies = ["numpy >= 1.26", "xarray >= 2023.9.0", "pint-xarray >= 0.4"]
+dependencies = ["numpy >= 1.26", "xarray >= 2024.3.0", "pint-xarray >= 0.5"]
 
 [dependency-groups]
 dev = [
