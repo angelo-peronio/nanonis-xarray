@@ -89,6 +89,7 @@ addopts = [
 filterwarnings = ["error"]
 log_cli_level = "DEBUG"
 minversion = "7"
+testpaths = ["README.md", "tests"]
 xfail_strict = true
 
 [tool.ruff.lint]
@@ -97,7 +98,6 @@ ignore = [
     "ANN",    # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
     "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
     "RET504", # https://docs.astral.sh/ruff/rules/unnecessary-assign/
-    # "TRY003", # https://docs.astral.sh/ruff/rules/raise-vanilla-args/
 ]
 extend-per-file-ignores."tests/*.py" = [
     "S101",    # https://docs.astral.sh/ruff/rules/assert/
@@ -110,9 +110,3 @@ files = ["src", "tests", "noxfile.py"]
 strict = true
 warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
-
-[tool.uv]
-# uv should not cache this package.
-# See e.g. warning at
-# <https://nox.thea.codes/en/stable/usage.html#changing-the-sessions-default-backend>
-reinstall-package = ["nanonis-xarray"]
