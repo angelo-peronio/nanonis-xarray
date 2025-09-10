@@ -68,3 +68,8 @@ This library is under development: expect breaking changes. Nanonis binary forma
 * [`nanonispy2`](https://github.com/ceds92/nanonispy2)
 * [`xarray-nanonis`](https://github.com/John3859/xarray-nanonis)
 * ... and [many more](https://pypi.org/search/?q=nanonis).
+
+## How to cite
+
+Cite `gsffile` in your published work using the metadata
+in [`CITATION.cff`](CITATION.cff)

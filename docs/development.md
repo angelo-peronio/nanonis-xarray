@@ -8,9 +8,6 @@
     * Plot.
     * Calculate averages.
     * Rotate lock-in x and y.
-* xarray extension
-* Evaluate [`pint_xarray`](https://xarray.dev/blog/introducing-pint-xarray).
-* Evaluate [`xarray_units`](https://github.com/astropenguin/xarray-units/)
 
 ## Ideas
 

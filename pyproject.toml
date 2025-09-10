@@ -46,7 +46,6 @@ dependencies = ["numpy >= 1.26", "xarray >= 2024.3.0", "pint-xarray >= 0.5"]
 
 [dependency-groups]
 dev = [
-    "build",
     "mypy",
     "pre-commit",
     "pre-commit-uv",
@@ -57,6 +56,10 @@ dev = [
 ]
 test = ["pytest", "pytest-cov"]
 docs = ["ipykernel", "ipympl", "seaborn"]
+
+[project.urls]
+Repository = "https://github.com/angelo-peronio/nanonis-xarray"
+Issues = "https://github.com/angelo-peronio/nanonis-xarray/issues"
 
 [project.entry-points."xarray.backends"]
 nanonis_dat = "nanonis_xarray.nanonis_dat_backend_entrypoint:NanonisDatBackendEntrypoint"
