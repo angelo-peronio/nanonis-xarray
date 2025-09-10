@@ -1,11 +1,11 @@
-#Requires -Version 7.4
 <#
     .SYNOPSIS
     Bootstrap a development environment.
 #>
 
-$PSNativeCommandUseErrorActionPreference = $true
+#Requires -Version 7.4
 $ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
-&"$PSScriptRoot\utils\New-PythonVenv.ps1"
-&"$PSScriptRoot\utils\Install-PreCommit.ps1"
+&"$PSScriptRoot\New-PythonVenv.ps1"
+&"$PSScriptRoot\Install-PreCommitHooks.ps1"

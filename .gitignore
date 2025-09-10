@@ -1,3 +1,6 @@
+# Ignore the lockfile, since we want to always use the latest version of the dependencies.
+uv.lock
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
