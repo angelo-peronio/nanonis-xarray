@@ -42,7 +42,7 @@ if (-Not $UpToDate) {
 }
 
 $DryRunOption = ($DryRun) ? "--dry-run" : ""
-uv run $(Get-UvRunOptions) bump-my-version bump $Bump --verbose $DryRunOption
+uv run $(Get-UvRunOptions) bump-my-version bump $Bump $DryRunOption --verbose
 
 if (-not ($DryRun)) {
     git push --follow-tags
