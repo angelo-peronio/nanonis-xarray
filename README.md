@@ -10,8 +10,9 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/angelo-peronio/nanonis-xarray/master.svg)](https://results.pre-commit.ci/latest/github/angelo-peronio/nanonis-xarray/master)
 [![codecov](https://codecov.io/github/angelo-peronio/nanonis-xarray/graph/badge.svg)](https://codecov.io/github/angelo-peronio/nanonis-xarray)
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
+[![DOI](https://zenodo.org/badge/1032126987.svg)](https://doi.org/10.5281/zenodo.17095214)
 
-[`nanonis_xarray`](https://github.com/angelo-peronio/nanonis-xarray) is a [`xarray`](https://xarray.dev/) plugin to read spectroscopy measurements saved in text
+[`nanonis-xarray`](https://github.com/angelo-peronio/nanonis-xarray) is a [`xarray`](https://xarray.dev/) plugin to read spectroscopy measurements saved in text
 format (`.dat`) by a [Nanonis Mimea](https://www.specs-group.com/nanonis/products/mimea/)
 SPM control system from [SPECS Surface Nano Analysis GmbH](https://www.specs-group.com/).
 
@@ -71,5 +72,21 @@ This library is under development: expect breaking changes. Nanonis binary forma
 
 ## How to cite
 
-Cite `gsffile` in your published work using the metadata
-in [`CITATION.cff`](CITATION.cff)
+Cite `nanonis-xarray` in your published work using the metadata
+in [`CITATION.cff`](CITATION.cff), or this general BibTeX entry:
+
+```bibtex
+@misc{Peronio_nanonis-xarray_2025,
+title = {nanonis-xarray},
+author = {Peronio, Angelo},
+url = {https://github.com/angelo-peronio/nanonis-xarray},
+doi = {10.5281/zenodo.17095214},
+year = {2025},
+month = {5}
+}
+
+```
+
+Specific DOIs for each released version are listed on [Zenodo](https://doi.org/10.5281/zenodo.17095214),
+but are not included in `CITATION.cff` due to a [limitation](https://github.com/zenodo/zenodo-rdm/issues/831)
+of Zenodo itself.
