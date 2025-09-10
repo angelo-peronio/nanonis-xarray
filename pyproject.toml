@@ -46,6 +46,7 @@ dependencies = ["numpy >= 1.26", "xarray >= 2024.3.0", "pint-xarray >= 0.5"]
 
 [dependency-groups]
 dev = [
+    "bump-my-version",
     "mypy",
     "pre-commit",
     "pre-commit-uv",
@@ -113,3 +114,20 @@ files = ["src", "tests", "noxfile.py"]
 strict = true
 warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.bumpversion]
+tag = true
+tag_name = "v{new_version}"
+tag_message = "Version v{new_version}"
+commit = true
+
+[[tool.bumpversion.files]]
+filename = "CITATION.cff"
+search = 'version: {current_version}'
+replace = 'version: {new_version}'
+
+[[tool.bumpversion.files]]
+filename = "CITATION.cff"
+search = 'date-released: "\d{{4}}-\d{{2}}-\d{{2}}"'
+replace = 'date-released: "{utcnow:%Y-%m-%d}"'
+regex = true
