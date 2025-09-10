@@ -41,7 +41,7 @@ if (-Not $UpToDate) {
     throw "Local repository is not up-to-date. Run git pull. Quitting."
 }
 
-$DryRunOption = ($DryRun) ? "--dry-run" : ""
+$DryRunOption = ($DryRun) ? "--dry-run" : $null
 uv run $(Get-UvRunOptions) bump-my-version bump $Bump $DryRunOption --verbose
 
 if (-not ($DryRun)) {
