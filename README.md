@@ -12,7 +12,7 @@
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 [![DOI](https://zenodo.org/badge/1032126987.svg)](https://doi.org/10.5281/zenodo.17095214)
 
-[`nanonis-xarray`](https://github.com/angelo-peronio/nanonis-xarray) is a [`xarray`](https://xarray.dev/) plugin to read spectroscopy measurements saved in text
+`nanonis-xarray` is a [`xarray`](https://xarray.dev/) plugin to read spectroscopy measurements saved in text
 format (`.dat`) by a [Nanonis Mimea](https://www.specs-group.com/nanonis/products/mimea/)
 SPM control system from [SPECS Surface Nano Analysis GmbH](https://www.specs-group.com/).
 
@@ -34,7 +34,7 @@ Coordinates:
 
 ```
 
-[pint-xarray](https://xarray.dev/blog/introducing-pint-xarray) is used to associate a physical unit to each channel, unless `xr.open_dataset()` is called with `quantify_vars=False`:
+[`pint-xarray`](https://xarray.dev/blog/introducing-pint-xarray) is used to associate a physical unit to each channel, unless `xr.open_dataset()` is called with `quantify_vars=False`:
 
 ```python
 >>> data["current"].pint.units
@@ -72,21 +72,5 @@ This library is under development: expect breaking changes. Nanonis binary forma
 
 ## How to cite
 
-Cite `nanonis-xarray` in your published work using the metadata
-in [`CITATION.cff`](CITATION.cff), or this general BibTeX entry:
-
-```bibtex
-@misc{Peronio_nanonis-xarray_2025,
-title = {nanonis-xarray},
-author = {Peronio, Angelo},
-url = {https://github.com/angelo-peronio/nanonis-xarray},
-doi = {10.5281/zenodo.17095214},
-year = {2025},
-month = {5}
-}
-
-```
-
-Specific DOIs for each released version are listed on [Zenodo](https://doi.org/10.5281/zenodo.17095214),
-but are not included in `CITATION.cff` due to a [limitation](https://github.com/zenodo/zenodo-rdm/issues/831)
-of Zenodo itself.
+Cite `nanonis-xarray` in your published work using the metadata in [`CITATION.cff`](CITATION.cff).
+Specific DOIs and BibTeX entries for each released version can be found on [Zenodo](https://doi.org/10.5281/zenodo.17095214).
