@@ -5,10 +5,10 @@
 [![pypi downloads](https://img.shields.io/pypi/dm/nanonis-xarray)](https://pypistats.org/packages/nanonis-xarray)
 [![license](https://img.shields.io/github/license/angelo-peronio/nanonis-xarray)](https://github.com/angelo-peronio/nanonis-xarray/blob/master/LICENSE)
 [![python](https://img.shields.io/pypi/pyversions/nanonis-xarray)](https://pypi.org/project/nanonis-xarray/)
-[![SPEC 0 — Minimum Supported Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-python.org/specs/spec-0000/)
 [![ci](https://github.com/angelo-peronio/nanonis-xarray/actions/workflows/ci.yaml/badge.svg)](https://github.com/angelo-peronio/nanonis-xarray/actions/workflows/ci.yaml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/angelo-peronio/nanonis-xarray/master.svg)](https://results.pre-commit.ci/latest/github/angelo-peronio/nanonis-xarray/master)
 [![codecov](https://codecov.io/github/angelo-peronio/nanonis-xarray/graph/badge.svg)](https://codecov.io/github/angelo-peronio/nanonis-xarray)
+[![SPEC 0 — Minimum Supported Dependencies](https://img.shields.io/badge/SPEC-0-green?labelColor=%23004811&color=%235CA038)](https://scientific-python.org/specs/spec-0000/)
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 [![DOI](https://zenodo.org/badge/1032126987.svg)](https://doi.org/10.5281/zenodo.17095214)
 
@@ -18,7 +18,7 @@ SPM control system from [SPECS Surface Nano Analysis GmbH](https://www.specs-gro
 
 The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/getting-started-guide/why-xarray.html#core-data-structures), where each measured channel (tunnelling current, AFM oscillation amplitude, …) is a [`xarray.DataArray`](https://docs.xarray.dev/en/stable/user-guide/data-structures.html#dataarray) with up to three dimensions:
 
-* The independent variable of the measurement, such as bias voltage or tip z position;
+* The independent variable of the measurement, such as sample bias voltage or tip z position;
 * The sweep number, if the measurement has been repeated multiple times;
 * The sweep direction (forward or backward), if the independent variable has been swept in both directions.
 

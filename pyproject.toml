@@ -49,7 +49,6 @@ dev = [
     "bump-my-version",
     "cffconvert",
     "mypy",
-    "pre-commit",
     "pre-commit-uv",
     "nox",
     "ruff",
