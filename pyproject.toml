@@ -49,10 +49,10 @@ dependencies = ["numpy >= 2.0.0", "xarray >= 2024.3.0", "pint-xarray >= 0.5"]
 dev = [
     "bump-my-version",
     "cffconvert",
-    "mypy",
-    "pre-commit-uv",
+    "prek",
     "nox",
     "ruff",
+    "ty",
     { include-group = "test" },
     { include-group = "docs" },
 ]

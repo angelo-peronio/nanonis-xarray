@@ -36,13 +36,6 @@ repos:
       - id: prettier
         types_or: [toml, yaml]
 
-  # - repo: https://github.com/pre-commit/mirrors-mypy
-  #   rev: "v1.12.0"
-  #   hooks:
-  #     - id: mypy
-  #       # Dependencies needed for their types.
-  #       additional_dependencies: [pint, xarry, nox, pytest]
-
   - repo: https://github.com/citation-file-format/cffconvert
     rev: b6045d78aac9e02b039703b030588d54d53262ac # The pre-commit hook has not been released yet.
     hooks:
