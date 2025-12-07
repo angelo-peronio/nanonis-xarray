@@ -52,6 +52,8 @@ class ColumnInfo:
         Sweep direction, forward ("fw") or backward ("bw")
     unit_str: str
         Channel physical units.
+    filtered: bool
+        Data has been filtered.
     """
 
     name: str
@@ -59,6 +61,7 @@ class ColumnInfo:
     sweep: int
     direction: Literal["fw", "bw"]
     unit_str: str
+    filtered: bool
 
     def __getitem__(self, item: str) -> str | int:
         """Get an attribute, dict-like."""
@@ -71,6 +74,7 @@ _column_label_regexp = re.compile(
     r"(?:\[(?P<sweep>\d{5})\] )?"
     r"(?:\[(?P<backward>bwd)\] )"
     r"?\((?P<unit_str>.*)\)"
+    r"(?: \[(?P<filtered>filt)\])?"
 )
 
 
@@ -84,6 +88,7 @@ def parse_column_label(label: str) -> ColumnInfo:
             sweep=sweep,
             direction="bw" if matched.group("backward") else "fw",
             unit_str=matched.group("unit_str"),
+            filtered=bool(matched.group("filtered")),
         )
     msg = f"Column label '{label}' not in the expected format."
     raise ValueError(msg)
