@@ -4,7 +4,7 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v6.0.0"
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -25,14 +25,14 @@ repos:
         exclude: "tests/data/.*"
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.14.7"
+    rev: v0.14.8
     hooks:
       - id: ruff-check
         args: ["--fix", "--show-fixes"]
       - id: ruff-format
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.7.3"
+    rev: v3.7.4
     hooks:
       - id: prettier
         types_or: [toml, yaml]

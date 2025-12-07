@@ -20,6 +20,7 @@ def test_a() -> None:
     assert data.attrs["Bias Spectroscopy"]["MultiLine Settings"][
         "Integration"
     ] == 0.1 * u("ms")
+    assert data.attrs["User"] is None
     assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
     assert isinstance(data.attrs["Date"], datetime)
 

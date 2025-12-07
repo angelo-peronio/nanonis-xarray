@@ -4,6 +4,8 @@ import re
 from datetime import datetime
 from pathlib import Path
 
+import numpy as np
+
 from . import unit_registry
 from .autonesting_dict import AutonestingDict
 
@@ -53,12 +55,12 @@ def parse_value(keys, value):
     """Parse values."""
     value = parse_bool_int_float(value)
     keys[-1], unit_str = split_unit(keys[-1])
-    if unit_str not in [None, *units_to_ignore]:
+    if unit_str not in {None, *units_to_ignore}:
         value *= unit_registry(unit_str)
     # Special cases.
     match keys:
-        case ["Date"]:
-            value = datetime.strptime(value, r"%d.%m.%Y %H:%M:%S")  # noqa: DTZ007
+        case ["Date"] | ["Saved Date"] | ["Start time"]:
+            value = datetime.strptime(value, r"%d.%m.%Y %H:%M:%S") if value else None  # noqa: DTZ007
         case [_, "Channels" | "channels"]:
             value = value.split(";")
         case ["Scan", "Scanfield"]:
@@ -68,12 +70,18 @@ def parse_value(keys, value):
     return keys, value
 
 
-def parse_bool_int_float(value: str) -> bool | int | float | str:
+def parse_bool_int_float(value: str) -> bool | int | float | str | None:
     """Attempt to parse a string into a bool, or an int, or a float."""
-    if value == "TRUE":
-        return True
-    if value == "FALSE":
-        return False
+    special_values = {
+        "": None,
+        "TRUE": True,
+        "FALSE": False,
+        "N/A": np.nan,
+    }
+    try:
+        return special_values[value]
+    except KeyError:
+        pass
     try:
         return int(value)
     except ValueError:
