@@ -1,8 +1,10 @@
 """Parse the header."""
 
 import re
+from collections.abc import Iterable
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -10,13 +12,13 @@ from . import unit_registry
 from .autonesting_dict import AutonestingDict
 
 # Nanonis quirk: these appear between round brackets like physical units, but are not.
-units_to_ignore = [
+units_to_ignore = {
     "on/off",  # Piezo Calibration>Drift correction status
     "xn",  # Bias Spectroscopy>MultiLine Settings
-]
+}
 
 
-def parse_header_lines(lines):
+def parse_header_lines(lines: Iterable[str]) -> dict[str, Any]:
     """Parse header lines."""
     keys_values = [split_header_line(line) for line in lines]
     keys_values = [
@@ -31,7 +33,7 @@ def parse_header_lines(lines):
     return header.asdict()
 
 
-def split_header_line(line):
+def split_header_line(line: str) -> tuple[list[str], str]:
     """Split a header line into a list of keys and a value."""
     # Strip \t\n from the end of each header line.
     key, value = line[:-2].split("\t")
@@ -51,11 +53,11 @@ def parse_multiline_settings(keys, value):
         yield keys, value
 
 
-def parse_value(keys, value):
+def parse_value(keys: list[str], value: str) -> tuple[list[str], Any]:
     """Parse values."""
     value = parse_bool_int_float(value)
     keys[-1], unit_str = split_unit(keys[-1])
-    if unit_str not in {None, *units_to_ignore}:
+    if unit_str and unit_str not in units_to_ignore:
         value *= unit_registry(unit_str)
     # Special cases.
     match keys:
@@ -95,7 +97,7 @@ def parse_bool_int_float(value: str) -> bool | int | float | str | None:
 units_regexp = re.compile(r"(?P<key>.*) \((?P<units>.*)\)$")
 
 
-def split_unit(key):
+def split_unit(key: str) -> tuple[str, str] | tuple[str, None]:
     """Extract physical unit from header key."""
     if match := units_regexp.match(key):
         return match.group("key"), match.group("units")
