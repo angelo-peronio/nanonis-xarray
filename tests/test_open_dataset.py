@@ -3,6 +3,7 @@
 from datetime import datetime
 from pathlib import Path
 
+import pytest
 import xarray as xr
 
 from nanonis_xarray import unit_registry as u
@@ -34,6 +35,13 @@ def test_df_v() -> None:
     assert data.direction.size == 2
     assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
     assert isinstance(data.attrs["Date"], datetime)
+
+
+def test_filtered() -> None:
+    """Test opening a .dat file."""
+    data_path = data_folder / "filtered.dat"
+    with pytest.warns(UserWarning, match="Reading filtered data"):
+        _ = xr.open_dataset(data_path, quantify_vars=False)
 
 
 def test_z() -> None:
