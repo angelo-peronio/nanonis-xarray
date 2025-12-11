@@ -3,6 +3,7 @@
 import re
 from dataclasses import dataclass
 from typing import Literal
+from warnings import warn
 
 import pandas as pd
 import xarray as xr
@@ -12,6 +13,13 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     """Parse the data."""
     # Drop the averages, they will be recomputed.
     data = data.drop(columns=[name for name in data.columns if "[AVG]" in name])
+    if any("[filt]" in name for name in data.columns):
+        data = data.drop(columns=[name for name in data.columns if "[filt]" in name])
+        warn(
+            "Reading filtered data not yet supported. "
+            "Feel free to open an issue if interested. Dropping filtered data.",
+            stacklevel=2,
+        )
     column_info = [parse_column_label(label) for label in data.columns]
     # Create a multi-index for the columns.
     multi_label_keys = ("name_norm", "sweep", "direction")
@@ -25,7 +33,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     data = data.set_index(multi_index[0])
     data.index.name = data.index.name[0]
     # Convert DataFrame -> Dataset
-    data = data.stack(level=(1, 2), future_stack=True)  # noqa: PD013
+    data = data.stack(level=tuple(range(1, len(multi_label_keys))), future_stack=True)  # noqa: PD013
     dataset = xr.Dataset.from_dataframe(data)
     # Set attributes.
     for info in column_info:
@@ -81,16 +89,15 @@ _column_label_regexp = re.compile(
 def parse_column_label(label: str) -> ColumnInfo:
     """Parse a Nanonis column label."""
     if matched := _column_label_regexp.match(label):
-        sweep = int(matched.group("sweep")) if matched.group("sweep") else 1
         return ColumnInfo(
             name=matched.group("name"),
             name_norm=normalize(matched.group("name")),
-            sweep=sweep,
+            sweep=int(matched.group("sweep")) if matched.group("sweep") else 1,
             direction="bw" if matched.group("backward") else "fw",
             unit_str=matched.group("unit_str"),
             filtered=bool(matched.group("filtered")),
         )
-    msg = f"Column label '{label}' not in the expected format."
+    msg = f"Column label not in the expected format: {label}"
     raise ValueError(msg)
 
 
