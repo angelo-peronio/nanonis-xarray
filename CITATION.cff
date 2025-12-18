@@ -32,5 +32,5 @@ identifiers:
     description: The concept DOI representing all the versions of this work.
 # Specific DOIs for each released version are listed on Zenodo:
 # https://doi.org/10.5281/zenodo.17095214
-version: 0.1.7
-date-released: "2025-10-09"
+version: 0.1.8
+date-released: "2025-12-18"
