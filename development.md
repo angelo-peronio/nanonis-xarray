@@ -16,8 +16,6 @@
 
 ## Prio 2
 
-* Enum instead of fw/bw (?)
-* CategoricalIndex for direction (?)
 * Which text encoding does Nanonis actually use?
 
 ## Notes

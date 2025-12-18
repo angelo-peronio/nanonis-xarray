@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import xarray as xr
 
@@ -28,7 +29,7 @@ def read_dat(
         else:
             msg = f"Invalid Nanonis .dat file. Tag {_data_tag} not found in {path}"
             raise RuntimeError(msg)
-        raw_data = pd.read_csv(file, sep="\t")
+        raw_data = pd.read_csv(file, sep="\t", dtype=np.float64)
     header = parse_header_lines(header_lines)
     dataset = parse_data(raw_data)
     dataset.attrs |= header

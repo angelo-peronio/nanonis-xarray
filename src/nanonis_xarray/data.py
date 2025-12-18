@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Literal
 from warnings import warn
 
+import numpy as np
 import pandas as pd
 import xarray as xr
 
@@ -26,7 +27,14 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     multi_labels = [
         {key: info[key] for key in (multi_label_keys)} for info in column_info
     ]
-    multi_index = pd.MultiIndex.from_frame(pd.DataFrame(multi_labels))
+    multi_labels_frame = pd.DataFrame(multi_labels).astype(
+        {
+            "name_norm": pd.StringDtype(),
+            "sweep": np.uint32,
+            "direction": pd.CategoricalDtype(categories=["fw", "bw"], ordered=True),
+        }
+    )
+    multi_index = pd.MultiIndex.from_frame(multi_labels_frame)
     data.columns = multi_index
     # The first column is the independent variable of the measurement,
     # we use it as row index.
