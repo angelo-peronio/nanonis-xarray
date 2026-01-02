@@ -29,8 +29,8 @@ The data is read into a [`xarray.Dataset`](https://docs.xarray.dev/en/stable/get
 >>> data.coords
 Coordinates:
   * z_rel      (z_rel) float64 2kB [m] -2.1e-10 -2.065e-10 ... 4.865e-10 4.9e-10
-  * sweep      (sweep) int64 24B 1 2 3
-  * direction  (direction) object 16B 'bw' 'fw'
+  * sweep      (sweep) uint32 12B 1 2 3
+  * direction  (direction) category 18B fw bw
 
 ```
 
