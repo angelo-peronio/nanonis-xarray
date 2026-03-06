@@ -31,7 +31,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
         {
             "name_norm": pd.StringDtype(),
             "sweep": np.uint32,
-            "direction": pd.CategoricalDtype(categories=["fw", "bw"], ordered=True),
+            "direction": pd.CategoricalDtype(categories=("fw", "bw"), ordered=True),
         }
     )
     multi_index = pd.MultiIndex.from_frame(multi_labels_frame)
