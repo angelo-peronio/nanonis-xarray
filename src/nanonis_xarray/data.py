@@ -1,5 +1,6 @@
 """Parse the data."""
 
+import logging
 import re
 from dataclasses import dataclass
 from typing import Literal
@@ -9,9 +10,12 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
+log = logging.getLogger(__name__)
+
 
 def parse_data(data: pd.DataFrame) -> xr.Dataset:
     """Parse the data."""
+    log.debug("%d data points", len(data))
     # Drop the averages, they will be recomputed.
     data = data.drop(columns=[name for name in data.columns if "[AVG]" in name])
     if any("[filt]" in name for name in data.columns):
@@ -40,6 +44,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     # we use it as row index.
     data = data.set_index(multi_index[0])
     data.index.name = data.index.name[0]
+    log.debug("Independent variable: %s", data.index.name)
     # Convert DataFrame -> Dataset
     data = data.stack(level=tuple(range(1, len(multi_label_keys))), future_stack=True)  # noqa: PD013
     dataset = xr.Dataset.from_dataframe(data)
@@ -49,6 +54,11 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
             "long_name": info["name"],
             "units": info["unit_str"],
         }
+    log.debug(
+        "%d data variables: %s",
+        len(dataset.data_vars),
+        ", ".join(dataset.data_vars.variables.keys()),
+    )
     return dataset
 
 
