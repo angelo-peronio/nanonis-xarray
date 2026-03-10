@@ -11,5 +11,5 @@ def test_units() -> None:
     """Test physical units."""
     data_path = data_folder / "a.dat"
     data = xr.open_dataset(data_path)
-    wannabe_power = data["current"] * data.attrs["Bias"]["Bias"]
+    wannabe_power = data["current"] * data.header["Bias"]["Bias"]
     assert wannabe_power.pint.units == u("watt")

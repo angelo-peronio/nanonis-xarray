@@ -18,12 +18,12 @@ def test_a() -> None:
 
     assert "sweep" not in data.data_vars
     assert "direction" not in data.data_vars
-    assert data.attrs["Bias Spectroscopy"]["MultiLine Settings"][
+    assert data.header["Bias Spectroscopy"]["MultiLine Settings"][
         "Integration"
     ] == 0.1 * u("ms")
-    assert data.attrs["User"] is None
-    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
-    assert isinstance(data.attrs["Date"], datetime)
+    assert data.header["User"] is None
+    assert isinstance(data.header["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.header["Date"], datetime)
 
 
 def test_df_v() -> None:
@@ -33,8 +33,8 @@ def test_df_v() -> None:
 
     assert "sweep" not in data.data_vars
     assert data.direction.size == 2
-    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
-    assert isinstance(data.attrs["Date"], datetime)
+    assert isinstance(data.header["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.header["Date"], datetime)
 
 
 def test_filtered() -> None:
@@ -49,11 +49,11 @@ def test_z() -> None:
     data_path = data_folder / "z.dat"
     data = xr.open_dataset(data_path)
 
-    assert data.attrs["Bias Spectroscopy"]["backward sweep"] is True
+    assert data.header["Bias Spectroscopy"]["backward sweep"] is True
     assert data.sweep.size == 3
     assert data.direction.size == 2
-    assert isinstance(data.attrs["NanonisMain"]["Session Path"], Path)
-    assert isinstance(data.attrs["Date"], datetime)
+    assert isinstance(data.header["NanonisMain"]["Session Path"], Path)
+    assert isinstance(data.header["Date"], datetime)
 
 
 def test_drop_variables() -> None:

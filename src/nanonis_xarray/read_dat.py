@@ -32,7 +32,7 @@ def read_dat(
         raw_data = pd.read_csv(file, sep="\t", dtype=np.float64)
     header = parse_header_lines(header_lines)
     dataset = parse_data(raw_data)
-    dataset.attrs |= header
+    dataset.attrs["header"] = header
     if quantify_vars:
         # Enable pint phyisical units.
         dataset = dataset.pint.quantify()

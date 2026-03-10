@@ -42,12 +42,12 @@ Coordinates:
 
 ```
 
-The header of the measurement is stored in the `attrs` nested dictionary:
+The header of the measurement is stored in the `header` nested dictionary:
 
 ```python
->>> data.attrs["Z Spectroscopy"]["Number of sweeps"]
+>>> data.header["Z Spectroscopy"]["Number of sweeps"]
 3
->>> data.attrs["Z Spectroscopy"]["backward sweep"]
+>>> data.header["Z Spectroscopy"]["backward sweep"]
 True
 
 ```
@@ -55,9 +55,9 @@ True
 Physical quantities are stored as [`pint.Quantity`](https://pint.readthedocs.io/en/stable/getting/tutorial.html#defining-a-quantity), timestamps as [`datetime.datetime`](https://docs.python.org/3/library/datetime.html#datetime-objects), and paths as [`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#basic-use):
 
 ```python
->>> data.attrs["NanonisMain"]["RT Frequency"]
+>>> data.header["NanonisMain"]["RT Frequency"]
 <Quantity(10000.0, 'hertz')>
->>> data.attrs["Date"]
+>>> data.header["Date"]
 datetime.datetime(2015, 3, 27, 11, 49, 5)
 
 ```
