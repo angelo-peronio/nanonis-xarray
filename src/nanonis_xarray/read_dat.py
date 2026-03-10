@@ -38,9 +38,14 @@ def read_dat(
     dataset = parse_data(raw_data)
     dataset.attrs["header"] = header
     if quantify_vars:
-        # Enable pint phyisical units.
+        # Enable pint physical units.
         dataset = dataset.pint.quantify()
     if squeeze:
         dataset = dataset.squeeze()
-    log.debug("Dimensions: %s", ", ".join(dataset.sizes.keys()))
+    log.debug(
+        "%d dimension%s: %s",
+        n := len(dataset.dims),
+        "s" if n != 1 else "",
+        ", ".join(dataset.sizes.keys()),
+    )
     return dataset

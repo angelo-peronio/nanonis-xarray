@@ -55,8 +55,9 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
             "units": info["unit_str"],
         }
     log.debug(
-        "%d data variables: %s",
-        len(dataset.data_vars),
+        "%d data variable%s: %s",
+        n := len(dataset.data_vars),
+        "s" if n != 1 else "",
         ", ".join(dataset.data_vars.variables.keys()),
     )
     return dataset
