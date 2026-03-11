@@ -57,7 +57,7 @@ def parse_data(data: pd.DataFrame) -> xr.Dataset:
     log.debug(
         "%d data variable%s: %s",
         n := len(dataset.data_vars),
-        "s" if n != 1 else "",
+        "" if n == 1 else "s",
         ", ".join(dataset.data_vars.variables.keys()),
     )
     return dataset

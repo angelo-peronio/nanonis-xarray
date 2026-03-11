@@ -45,7 +45,7 @@ def read_dat(
     log.debug(
         "%d dimension%s: %s",
         n := len(dataset.dims),
-        "s" if n != 1 else "",
+        "" if n == 1 else "s",
         ", ".join(dataset.sizes.keys()),
     )
     return dataset
