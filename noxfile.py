@@ -1,3 +1,5 @@
+#!/usr/bin/env -S uv run --script
+
 # /// script
 # dependencies = ["nox >= 2025.2.9", "packaging"]
 # ///
