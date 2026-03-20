@@ -50,13 +50,12 @@ dev = [
     "bump-my-version",
     "cffconvert",
     "prek",
-    "nox",
     "ruff",
     "ty",
     { include-group = "test" },
     { include-group = "docs" },
 ]
-test = ["pytest > 9", "pytest-cov"]
+test = ["nox >= 2025.2.9", "packaging", "pytest > 9", "pytest-cov"]
 docs = ["ipykernel", "ipympl", "seaborn"]
 
 [project.urls]
