@@ -49,7 +49,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Test package
-        run: uvx nox
+        run: uvx nox@latest --verbose
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
