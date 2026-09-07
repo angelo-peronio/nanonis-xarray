@@ -27,14 +27,14 @@ repos:
         exclude: "tests/data/.*"
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.20
+    rev: v0.16.6
     hooks:
       - id: ruff-check
         args: ["--fix", "--show-fixes"]
       - id: ruff-format
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.9.4
+    rev: v3.9.6
     hooks:
       - id: prettier
         types_or: [toml, yaml]
