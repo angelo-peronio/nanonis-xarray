@@ -27,10 +27,10 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     # Wait for NumPy and pandas to publish their compiled wheels
     # for a new Python version before supporting it.
     "Programming Language :: Python :: Implementation :: CPython",
@@ -40,10 +40,10 @@ classifiers = [
 ]
 # Scientific Python recommendation on versions to support:
 # <https://scientific-python.org/specs/spec-0000/>
-requires-python = ">= 3.11"
+requires-python = ">= 3.12"
 # Before attempting stunts here, consider the fragile logic
 # for oldest_deps in noxfile.py.
-dependencies = ["numpy >= 2.0.0", "xarray >= 2025.6", "pint-xarray >= 0.5"]
+dependencies = ["numpy >= 2", "xarray >= 2025.6", "pint-xarray >= 0.5"]
 
 [dependency-groups]
 dev = [
@@ -55,7 +55,7 @@ dev = [
     { include-group = "test" },
     { include-group = "docs" },
 ]
-test = ["nox >= 2025.2.9", "packaging", "pytest > 9", "pytest-cov"]
+test = ["nox >= 2026.08.10", "packaging", "pytest > 9", "pytest-cov"]
 docs = ["ipykernel", "ipympl", "seaborn"]
 
 [project.urls]

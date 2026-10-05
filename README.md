@@ -38,7 +38,7 @@ Coordinates:
 
 ```python
 >>> data["current"].pint.units
-<Unit('ampere')>
+Unit("ampere")
 
 ```
 
@@ -56,7 +56,7 @@ Physical quantities are stored as [`pint.Quantity`](https://pint.readthedocs.io/
 
 ```python
 >>> data.header["NanonisMain"]["RT Frequency"]
-<Quantity(10000.0, 'hertz')>
+Quantity(array(10000.), "hertz")
 >>> data.header["Date"]
 datetime.datetime(2015, 3, 27, 11, 49, 5)
 
