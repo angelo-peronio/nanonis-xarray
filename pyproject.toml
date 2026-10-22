@@ -26,14 +26,13 @@ license = "MIT"
 authors = [ { name = "Angelo Peronio" } ]
 # Scientific Python recommendation on versions to support:
 # <https://scientific-python.org/specs/spec-0000/>
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
@@ -47,7 +46,7 @@ classifiers = [
 dynamic = [ "version" ]
 # Before attempting stunts here, consider the fragile logic
 # for oldest_deps in noxfile.py.
-dependencies = [ "numpy>=2", "pint-xarray>=0.5", "xarray>=2025.6" ]
+dependencies = [ "numpy>=2.2", "pint-xarray>=0.5", "xarray>=2025.6" ]
 urls.Issues = "https://github.com/angelo-peronio/nanonis-xarray/issues"
 urls.Repository = "https://github.com/angelo-peronio/nanonis-xarray"
 entry-points."xarray.backends".nanonis_dat = """\

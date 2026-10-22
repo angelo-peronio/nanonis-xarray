@@ -22,7 +22,8 @@
 
 ## Notes
 
-* It seems Nanonis ships Python routines <https://www.specs-group.com/nanonis/products/mimea/mimea-software/#c1315>
+* It seems Nanonis ships Python routines, see
+<https://www.specs-group.com/nanonis/products/mimea/mimea-software/#c1315>
 * Nanonis has two packages on PyPI:
     * [`nanonis-tramea`](https://pypi.org/project/nanonis-tramea/)
     * [`nanaonis-spm`](https://pypi.org/project/nanonis-spm/)
