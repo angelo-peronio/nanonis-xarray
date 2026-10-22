@@ -49,9 +49,13 @@ dependencies = ["numpy >= 2", "xarray >= 2025.6", "pint-xarray >= 0.5"]
 dev = [
     "bump-my-version",
     "cffconvert",
+    "just-lsp",
     "prek",
     "ruff",
     "ty",
+    "rumdl",
+    "rust-just",
+    "zizmor",
     { include-group = "test" },
     { include-group = "docs" },
 ]
@@ -126,3 +130,25 @@ filename = "CITATION.cff"
 search = 'date-released: "\d{{4}}-\d{{2}}-\d{{2}}"'
 replace = 'date-released: "{utcnow:%Y-%m-%d}"'
 regex = true
+
+[tool.rumdl.global]
+line-length = 88
+# extend-disable = ["line-length"]
+
+[tool.rumdl.ul-indent]
+indent = 4
+
+[tool.rumdl.line-length]
+# https://rumdl.dev/md013/
+# https://rumdl.dev/md013/#sentence-per-line-without-line-length-warnings
+paragraphs = true  # Do not check paragraphs.
+code-blocks = false # Do not check code blocks, some of them are meant to be long.
+tables = false
+reflow = true
+reflow-mode = "normalize"
+
+[tool.rumdl.table-format]
+# https://rumdl.dev/md060/
+enabled = true
+style = "aligned"
+column-align = "auto"

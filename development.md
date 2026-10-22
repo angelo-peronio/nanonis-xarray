@@ -8,6 +8,8 @@
     * Plot.
     * Calculate averages.
     * Rotate lock-in x and y.
+* split CI
+* zizmor
 
 ## Ideas
 
