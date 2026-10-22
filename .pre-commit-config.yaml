@@ -37,7 +37,7 @@ repos:
     rev: v3.9.10
     hooks:
       - id: prettier
-        types_or: [toml, yaml]
+        types_or: [yaml]
 
   - repo: https://github.com/citation-file-format/cffconvert
     # As of 2026-03-06, the latest release tag is 2.0.0.
@@ -46,3 +46,8 @@ repos:
     rev: b6045d78aac9e02b039703b030588d54d53262ac
     hooks:
       - id: validate-cff
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "v2.30.3"
+    hooks:
+      - id: pyproject-fmt
