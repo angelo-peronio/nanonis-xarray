@@ -48,6 +48,12 @@ repos:
       - id: validate-cff
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.30.3"
+    rev: v2.30.3
     hooks:
       - id: pyproject-fmt
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.5
+    hooks:
+      - id: uv-lock
+      - id: uv-audit
